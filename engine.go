@@ -1,7 +1,6 @@
 package pastis
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -50,7 +49,6 @@ func (e *Engine) handle(method, path string, handler Handler) {
 
 func (e *Engine) Run(event events.ALBTargetGroupRequest) (events.ALBTargetGroupResponse, error) {
 	params := make(params)
-	fmt.Println(event)
 	node, _ := e.tree.traverse(strings.Split(event.Path, "/")[1:], params)
 	context := NewContext(params,event)
 	if handler := node.methods[event.HTTPMethod]; handler != nil {
