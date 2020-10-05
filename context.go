@@ -19,7 +19,16 @@ func NewContext(params params, request events.ALBTargetGroupRequest) *Context{
 		Params:  params,
 		Queries: request.QueryStringParameters,
 		Request: request,
-		Response: events.ALBTargetGroupResponse{},
+		Response: events.ALBTargetGroupResponse{
+			StatusCode:        http.StatusOK,
+			StatusDescription: http.StatusText(http.StatusOK),
+			Headers: map[string]string{
+				"content-type":"application/json",
+			},
+			MultiValueHeaders: nil,
+			Body:              "",
+			IsBase64Encoded:   false,
+		},
 	}
 }
 
