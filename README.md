@@ -1,1 +1,2 @@
-# pastis
+# Pastis AWSLambda Framework
+
