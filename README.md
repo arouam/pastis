@@ -1,6 +1,6 @@
 # Pastis AWSLambda Framework
 
-Pasits is a "pseudo" Golang web framework to develep AWSLambda APIs. mainly inspired from the [Gin Web Framework](https://github.com/gin-gonic/gin).
+Pastis is a "pseudo" Golang web framework to develep AWSLambda APIs. mainly inspired by the [Gin Web Framework](https://github.com/gin-gonic/gin).
 
 ## installation:
 
@@ -19,7 +19,7 @@ import "github.com/arouam/pastis"
         r := pastis.New()
         r.GET("/helloworld", func(context *pastis.Context) {
             context.JSON(200, pastis.Object{
-                "hello": "world",    
+                "hello": "world",
             })
         })
     }
@@ -32,7 +32,7 @@ import "github.com/arouam/pastis"
         r.GET("/hello/:name", func(context *pastis.Context) {
             name := context.Param("name")
             context.JSON(200, pastis.Object{
-                "hello": name,    
+                "hello": name,
             })
         })
     }
@@ -45,7 +45,7 @@ import "github.com/arouam/pastis"
         r.GET("/hello", func(context *pastis.Context) {
             name := context.Query("name")
             context.JSON(200, pastis.Object{
-                "hello": name,    
+                "hello": name,
             })
         })
     }
@@ -56,8 +56,8 @@ import "github.com/arouam/pastis"
    type User struct {
      Name string `json:"name"`
    }
-   
-   func main(){        
+
+   func main(){
         r := pastis.New()
         r.POST("/users", func(context *pastis.Context) {
             var user User
@@ -65,6 +65,7 @@ import "github.com/arouam/pastis"
                 context.JSON(http.StatusBadRequest, pastis.Object{
                   "err": err.Error(),
                 })
+                return
             }
             context.JSON(201, user)
         })
