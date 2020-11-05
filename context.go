@@ -55,6 +55,17 @@ func (c *Context) JSON(statusCode int, i interface{}) {
 	}
 }
 
+func (c *Context) Text(statusCode int, text string) {
+	c.Response = events.ALBTargetGroupResponse{
+		StatusCode:        statusCode,
+		StatusDescription: http.StatusText(statusCode),
+		Headers:           map[string]string{"content-type": "text/plain"},
+		MultiValueHeaders: nil,
+		Body:              text,
+		IsBase64Encoded:   false,
+	}
+}
+
 func (c *Context) Param(key string) string {
 	return c.Params.get(key)
 }
