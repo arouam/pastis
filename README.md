@@ -1,6 +1,6 @@
 # Pastis AWSLambda Framework
 
-Pastis is a "pseudo" Golang web framework to develep AWSLambda APIs. mainly inspired by the [Gin Web Framework](https://github.com/gin-gonic/gin).
+Pastis is a "pseudo" Golang web framework to develop AWSLambda APIs. mainly inspired by the [Gin Web Framework](https://github.com/gin-gonic/gin).
 
 ## installation:
 
