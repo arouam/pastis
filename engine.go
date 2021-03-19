@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/aws/aws-lambda-go/events"
 )
 
@@ -18,6 +20,7 @@ type Engine struct {
 	BasePath       string
 	tree           *node
 	DefaultHandler Handler
+	Logger         *logrus.Logger
 }
 
 func (e *Engine) GET(path string, handler Handler) {
@@ -56,6 +59,12 @@ func (e *Engine) Run(event events.ALBTargetGroupRequest) (events.ALBTargetGroupR
 	} else if e.DefaultHandler != nil {
 		e.DefaultHandler(context)
 	}
+	e.Logger.WithFields(logrus.Fields{
+		"method": event.HTTPMethod,
+		"path":   event.Path,
+		"query":  context.Queries,
+		"status": context.Response.StatusCode,
+	}).Infoln(context.Response.StatusDescription)
 	return context.Response, nil
 }
 
@@ -76,5 +85,6 @@ func New() *Engine {
 				IsBase64Encoded:   false,
 			}
 		},
+		Logger: NewLogger("text"),
 	}
 }
