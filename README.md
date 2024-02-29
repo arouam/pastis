@@ -22,6 +22,7 @@ import "github.com/arouam/pastis"
                 "hello": "world",
             })
         })
+        pastis.Start(r)
     }
 ```
 ## Path parameters:
